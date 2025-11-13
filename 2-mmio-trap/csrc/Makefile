@@ -40,12 +40,6 @@ nyancat.asmbin: nyancat.c nyancat-data.h init_minimal.o
 	$(CROSS_COMPILE)ld -o nyancat.elf -T link.lds $(LDFLAGS) nyancat.o init_minimal.o
 	$(OBJCOPY) -O binary -j .text -j .data nyancat.elf $@
 
-# Nyancat with opcode-based RLE compression
-nyancat-opcode-rle.asmbin: nyancat-opcode-rle.c init_minimal.o
-	$(CC) $(CFLAGS) -c -o nyancat-opcode-rle.o nyancat-opcode-rle.c
-	$(CROSS_COMPILE)ld -o nyancat-opcode-rle.elf -T link.lds $(LDFLAGS) nyancat-opcode-rle.o init_minimal.o
-	$(OBJCOPY) -O binary -j .text -j .data nyancat-opcode-rle.elf $@
-
 init_minimal.o: init_minimal.S
 	$(AS) -R $(ASFLAGS) -o $@ $<
 
